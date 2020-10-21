@@ -15,10 +15,12 @@
 package entities
 
 import (
-	"github.com/stretchr/testify/assert"
 	"net"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
+
 var uniqueTemplateID uint16 = 256
 
 func TestPrepareRecord(t *testing.T) {

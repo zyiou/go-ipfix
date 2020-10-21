@@ -7,3 +7,7 @@ codegen:
 
 check:
 	$(GO) test ./...
+
+golangci:
+	@curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(GOPATH)/bin v1.21.0
+	$(GOPATH)/bin/golangci-lint run -c .golangci.yml

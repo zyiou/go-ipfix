@@ -227,7 +227,7 @@ func (d *dataRecord) AddInfoElement(element *InfoElement, val interface{}) (uint
 		return 0, err
 	}
 
-	return uint16(d.buff.Len()-initialLength), nil
+	return uint16(d.buff.Len() - initialLength), nil
 }
 
 func (t *templateRecord) PrepareRecord() (uint16, error) {
@@ -237,7 +237,7 @@ func (t *templateRecord) PrepareRecord() (uint16, error) {
 	if err != nil {
 		return 0, fmt.Errorf("AddInfoElement(templateRecord) error in writing template header: %v", err)
 	}
-	return uint16(t.buff.Len()-initialLength), nil
+	return uint16(t.buff.Len() - initialLength), nil
 }
 
 func (t *templateRecord) AddInfoElement(element *InfoElement, val interface{}) (uint16, error) {
@@ -266,7 +266,7 @@ func (t *templateRecord) AddInfoElement(element *InfoElement, val interface{}) (
 	} else {
 		t.minDataRecLength = t.minDataRecLength + element.Len
 	}
-	return uint16(t.buff.Len()-initialLength), nil
+	return uint16(t.buff.Len() - initialLength), nil
 }
 
 func (t *templateRecord) GetTemplateElements() []*InfoElement {
