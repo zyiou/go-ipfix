@@ -35,6 +35,18 @@ For example:
 ./generate-manifest-collector.sh --mode dev --port 4739 --proto tcp > ../build/yamls/ipfix-collector.yaml
 ```
 
+### Start a Kafka instance
+To start a Kafka server with minimum Kubernetes setup, run
+```shell
+kubectl apply -f build/yamls/kafka-server.yaml -n [NAMESPACE]
+``` 
+Broker address will be `kafka-service:9092`.
+Then we can connect a Kafka consumer to this server by running: 
+```shell
+kubectl create deployment --image=antrea/kafka-consumer consumer -n [NAMESPACE]
+``` 
+Currently, `antrea/kafka-consumer` only supports decoding and logging messages with AntreaFlowMsg proto schema.
+
 ## Build Registry
 To build the registry from [IANA registry](https://www.iana.org/assignments/ipfix/ipfix.xhtml) or [Antrea registry](pkg/registry/registry_antrea.csv), run following commands:
 

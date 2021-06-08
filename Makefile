@@ -34,11 +34,19 @@ collector:
 	@mkdir -p $(BINDIR)
 	GOOS=linux $(GO) build -o $(BINDIR) github.com/vmware/go-ipfix/cmd/collector/
 
+consumer:
+	@mkdir -p $(BINDIR)
+	GOOS=linux $(GO) build -o $(BINDIR) github.com/vmware/go-ipfix/cmd/consumer/
+
 ### Docker images ###
 
 docker-collector:
 	@echo "===> Building antrea/ipfix-collector Docker image <==="
 	docker build --pull -t antrea/ipfix-collector -f build/images/Dockerfile.build.collector .
+
+docker-consumer:
+	@echo "===> Building antrea/ipfix-consumer Docker image <==="
+	docker build --pull -t antrea/ipfix-consumer -f build/images/Dockerfile.build.consumer .
 
 .PHONY: manifest
 manifest:
