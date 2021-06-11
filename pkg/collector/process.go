@@ -371,12 +371,13 @@ func getMessageLength(msgBuffer *bytes.Buffer) (int, error) {
 // getFieldLength returns string field length for data record
 // (encoding reference: https://tools.ietf.org/html/rfc7011#appendix-A.5)
 func getFieldLength(dataBuffer *bytes.Buffer) int {
-	var lengthOneByte uint8
-	util.Decode(dataBuffer, binary.BigEndian, &lengthOneByte)
+	if dataBuffer.Len() == 0 {
+		return 0
+	}
+	lengthOneByte := dataBuffer.Next(1)[0]
 	if lengthOneByte < 255 { // string length is less than 255
 		return int(lengthOneByte)
 	}
-	var lengthTwoBytes uint16
-	util.Decode(dataBuffer, binary.BigEndian, &lengthTwoBytes)
+	lengthTwoBytes := binary.BigEndian.Uint16(dataBuffer.Next(2))
 	return int(lengthTwoBytes)
 }
