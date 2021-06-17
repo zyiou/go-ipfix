@@ -711,12 +711,14 @@ func getFlowKeyFromRecord(record entities.Record) (*FlowKey, error) {
 			flowKey.Protocol = proto
 		}
 	}
+	klog.Info(*flowKey)
 	return flowKey, nil
 }
 
 // addOriginalExporterInfo adds originalExporterIP and originalObservationDomainId to records in message set
 func addOriginalExporterInfo(message *entities.Message) error {
 	isIPv4 := false
+	klog.Info(message.GetExportAddress())
 	exporterIP := net.ParseIP(message.GetExportAddress())
 	if exporterIP.To4() != nil {
 		isIPv4 = true
