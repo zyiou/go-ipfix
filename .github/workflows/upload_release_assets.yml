@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build assets
-        run: cp ./build/yamls/kafka-server.yaml > ./assets
+        run: cp ./build/yamls/kafka-server.yaml ./assets
       - name: Upload kafka-server.yaml
         uses: actions/upload-release-asset@v1
         env:
