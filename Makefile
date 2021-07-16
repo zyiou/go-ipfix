@@ -18,7 +18,7 @@ codegen:
 	mkdir -p ./.coverage
 
 test-unit: .coverage
-	$(GO) test -race ./... -covermode=atomic -coverprofile=.coverage/coverage_unit.txt
+	$(GO) test -race ./... -count=10 -covermode=atomic -coverprofile=.coverage/coverage_unit.txt
 
 test-integration: .coverage
 	$(GO) test -race ./pkg/test/... -tags=integration -covermode=atomic -coverprofile=.coverage/coverage_integration.txt -coverpkg github.com/vmware/go-ipfix/pkg/collector,github.com/vmware/go-ipfix/pkg/exporter,github.com/vmware/go-ipfix/pkg/intermediate,github.com/vmware/go-ipfix/pkg/kafka/producer
